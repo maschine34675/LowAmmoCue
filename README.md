@@ -10,8 +10,6 @@ Clicks get louder as ammunition runs out: the first warning click uses 35% of yo
 
 Builds install to `D:\SPT41\BepInEx\plugins\LowAmmoCue\` by default. Restart the game after installing the DLL. A server restart is unnecessary.
 
-The **original Counter-Strike lowammo.wav is embedded directly in the DLL**, byte-for-byte as supplied by the user. No external sound file is required or extracted. The progressive volume ramp applies as before. This local DLL contains proprietary audio with no established redistribution permission; embedding does not change that status. See [AUDIO-LICENSES.md](AUDIO-LICENSES.md).
-
 ## Settings (F12 → maschine-LowAmmoCue)
 
 | Setting | Default | Effect |
