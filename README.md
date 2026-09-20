@@ -18,7 +18,7 @@ Builds install to `D:\SPT41\BepInEx\plugins\LowAmmoCue\` by default. Restart the
 | Warning Mode | Percentage | Percentage of weapon capacity or fixed final-shot count. |
 | Warning Threshold (%) | 20 | Last 20% of total capacity, rounded down with a minimum of one shot. |
 | Warning Shots (rounds) | 5 | Final five shots when using Rounds mode; displayed as a round count. |
-| Maximum Click Volume | 50% | Maximum volume per click on the last shot, additionally controlled by the game's master volume. Existing saved volume values are retained. |
+| Maximum Click Volume | 35% | Maximum volume per click on the last shot, additionally controlled by the game's master volume. Existing saved volume values are retained. |
 | Enable Debug Logging | false | Enable mod diagnostic logs and reveal the two diagnostic controls below. |
 | Test Click at Maximum Volume | false | Visible and active only with debug enabled. Play one click at the configured maximum volume; resets automatically. |
 | Reload Click Sound | false | Visible and active only with debug enabled. Recheck the override and embedded default immediately; resets automatically. |
