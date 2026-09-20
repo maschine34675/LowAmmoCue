@@ -1,0 +1,50 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <AssemblyName>maschine-LowAmmoCue</AssemblyName>
+    <RootNamespace>LowAmmoCue</RootNamespace>
+    <Authors>maschine</Authors>
+    <Company>https://github.com/maschine34675/LowAmmoCue</Company>
+    <Version>1.0.0</Version>
+    <AssemblyVersion>$(Version)</AssemblyVersion>
+    <FileVersion>$(Version)</FileVersion>
+    <LangVersion>latest</LangVersion>
+    <Nullable>disable</Nullable>
+    <Deterministic>true</Deterministic>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <SptRoot Condition="'$(SptRoot)' == ''">$(MSBuildThisFileDirectory)..\..</SptRoot>
+    <ManagedPath>$(SptRoot)\EscapeFromTarkov_Data\Managed</ManagedPath>
+    <DeployOnBuild Condition="'$(DeployOnBuild)' == ''">true</DeployOnBuild>
+    <StagePath>$(MSBuildThisFileDirectory)artifacts\local-embedded\BepInEx\plugins\LowAmmoCue</StagePath>
+    <InstallPath>$(SptRoot)\BepInEx\plugins\LowAmmoCue</InstallPath>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="src\**\*.cs" />
+    <EmbeddedResource Include="local-test\lowammo.wav" LogicalName="LowAmmoCue.Audio.lowammo.wav" />
+    <Reference Include="BepInEx" HintPath="$(SptRoot)\BepInEx\core\BepInEx.dll" Private="false" />
+    <Reference Include="0Harmony" HintPath="$(SptRoot)\BepInEx\core\0Harmony.dll" Private="false" />
+    <Reference Include="Assembly-CSharp" HintPath="$(ManagedPath)\Assembly-CSharp.dll" Private="false" />
+    <Reference Include="Comfort" HintPath="$(ManagedPath)\Comfort.dll" Private="false" />
+    <Reference Include="Comfort.Unity" HintPath="$(ManagedPath)\Comfort.Unity.dll" Private="false" />
+    <Reference Include="ItemComponent.Types" HintPath="$(ManagedPath)\ItemComponent.Types.dll" Private="false" />
+    <Reference Include="Sirenix.Serialization" HintPath="$(ManagedPath)\Sirenix.Serialization.dll" Private="false" />
+    <Reference Include="UnityEngine" HintPath="$(ManagedPath)\UnityEngine.dll" Private="false" />
+    <Reference Include="UnityEngine.CoreModule" HintPath="$(ManagedPath)\UnityEngine.CoreModule.dll" Private="false" />
+    <Reference Include="UnityEngine.AudioModule" HintPath="$(ManagedPath)\UnityEngine.AudioModule.dll" Private="false" />
+  </ItemGroup>
+  <Target Name="RequireEmbeddedSound" BeforeTargets="PrepareForBuild">
+    <Error Condition="!Exists('local-test\lowammo.wav')" Text="Provide your own original lowammo.wav in local-test before building. The embedded recording is not supplied in source control; redistribution rights are not established." />
+  </Target>
+  <Target Name="StagePlugin" AfterTargets="Build">
+    <MakeDir Directories="$(StagePath)" />
+    <Copy SourceFiles="$(TargetPath)" DestinationFolder="$(StagePath)" />
+    <Copy SourceFiles="LICENSE;AUDIO-LICENSES.md;audio\SOURCES.json" DestinationFolder="$(StagePath)" />
+  </Target>
+  <Target Name="DeployToSpt" AfterTargets="StagePlugin" Condition="'$(DeployOnBuild)' == 'true'">
+    <Error Condition="!Exists('$(SptRoot)\EscapeFromTarkov.exe')" Text="SptRoot must point to an SPT install." />
+    <MakeDir Directories="$(InstallPath)" />
+    <Copy SourceFiles="$(TargetPath)" DestinationFolder="$(InstallPath)" />
+    <Copy SourceFiles="LICENSE;AUDIO-LICENSES.md;audio\SOURCES.json" DestinationFolder="$(InstallPath)" />
+  </Target>
+</Project>

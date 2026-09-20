@@ -1,0 +1,9 @@
+bin/
+obj/
+artifacts/
+local-test/
+.vs/
+*.user
+*.suo
+.unlazy/
+/lowammo.wav

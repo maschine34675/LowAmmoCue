@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net48</TargetFramework>
+    <OutputType>Exe</OutputType>
+    <LangVersion>latest</LangVersion>
+    <Nullable>disable</Nullable>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <DefineConstants>HOOK_CHECKS</DefineConstants>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="..\GameStandIns.cs" Link="GameStandIns.cs" />
+    <Compile Include="..\..\src\ShotPatch.cs" Link="Production\ShotPatch.cs" />
+    <Compile Include="..\..\src\ShotObserver.cs" Link="Production\ShotObserver.cs" />
+    <Reference Include="0Harmony" HintPath="..\..\..\..\BepInEx\core\0Harmony.dll" Private="true" />
+  </ItemGroup>
+</Project>
